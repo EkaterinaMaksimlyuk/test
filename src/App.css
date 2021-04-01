@@ -2,6 +2,110 @@
   text-align: center;
 }
 
+.toolbar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  width: 100%;
+}
+
+.search-container {
+  width: 40%;
+  position: relative;
+}
+
+.product {
+  width: 25%;
+  height: 26vH;
+  background-color: white;
+  margin: 2.5vH 4% 0;
+}
+
+.product-background {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  height: 50%;
+  width: 70%;
+  margin: 1rem auto;
+}
+
+.product-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.product-name {
+  font-size: 0.7rem;
+}
+
+.list {
+  display: flex;
+  align-content: center;
+}
+
+.empty-search {
+  margin: 1rem;
+}
+
+.list-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+}
+
+.loader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+.reset {
+  position: absolute;
+  cursor: pointer;
+  bottom: 0;
+  left: 0;
+  color: blueviolet;
+  border: 0;
+  padding: 5px 5px 0 0;
+  outline: none;
+  background: none;
+  font-size: 1.5rem;
+}
+
+.search-icon {
+  font-size: 1rem;
+  height: 1.5rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: blueviolet;
+}
+
+.search-input {
+  font-size: 1.5rem;
+  width: 100%;
+  padding: 0 15px;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid cornflowerblue;
+}
+
+.search-input::-ms-clear {
+  left: 0;
+}
+
+.search-input:focus{
+  border-bottom: 1px solid blueviolet;
+  outline: none;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
