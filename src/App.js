@@ -9,6 +9,7 @@ import './App.css';
 import useList from './hooks/useList';
 import List from './components/List';
 import Product from './components/cards/ProductCard';
+import getList from './helpers/request';
 
 const useStyles = makeStyles({
   root: {
@@ -25,7 +26,25 @@ const App = () => {
 
   const classes = useStyles();
 
-  const onSearch = React.useCallback((e) => {
+  const getItems = async (newListProps) => {
+    if ((!list.isLoading) || (list.isLoading && list.page === 1)) {
+      dispatchList({ type: 'SET_LOADING', value: true });
+      let results;
+      try {
+        results = await getList({
+          ...list,
+          ...newListProps,
+        });
+        dispatchList({ type: 'ADD_ITEMS', value: results });
+      } catch (e) {
+        console.error(e);
+      } finally {
+        dispatchList({ type: 'SET_LOADING', value: false });
+      }
+    }
+  };
+
+  const onSearch = (e) => {
     const value = e?.target?.value ?? e;
     dispatchList({
       type: 'SET_QUERY',
@@ -34,13 +53,15 @@ const App = () => {
     if (!showResult) {
       setShowResult(true);
     }
-  }, [showResult, dispatchList]);
+    return getItems({ items: [], page: 1, query: value });
+  };
 
   React.useEffect(() => {
     if (list?.query?.length < 1 && showResult) {
       setShowResult(false);
     }
   }, [list?.query, showResult]);
+
 
   return (
     <div className="App">
@@ -69,7 +90,6 @@ const App = () => {
             {list.init && (
               <List
                 list={list}
-                dispatchList={dispatchList}
                 Element={Product}
               />
             )}

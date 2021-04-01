@@ -1,32 +1,11 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import Loader from 'react-loader-spinner';
-import getList from '../helpers/request';
-
 
 const List = React.memo((
   {
     list,
-    dispatchList,
     Element,
   }) => {
-  const getItems = async () => {
-    if ((!list.isLoading) || (list.isLoading && list.page === 1)) {
-      dispatchList({ type: 'SET_LOADING', value: true });
-      let results;
-      try {
-        results = await getList({
-          ...list,
-        });
-        dispatchList({ type: 'ADD_ITEMS', value: results });
-      } catch (e) {
-        console.error(e);
-      } finally {
-        dispatchList({ type: 'SET_LOADING', value: false });
-      }
-    }
-  };
-
-  useEffect(() => getItems(), [list.query]);
 
   const notFound = useMemo(() => {
     if (list.isLoading || !list.query) {
